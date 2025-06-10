@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skrining PUMA Score PPOK</title>
+    <meta name="description" content="Formulir Skrining PUMA Score untuk Penyakit Paru Obstruktif Kronik (PPOK) - Tool Gratis untuk Tenaga Kesehatan">
+    <meta name="keywords" content="PUMA Score, PPOK, COPD, skrining, penilaian paru, spirometri, mMRC, eksaserbasi">
+    <meta name="author" content="Medical Screening Tool">
+    <title>Skrining PUMA Score PPOK - Tool Gratis untuk Tenaga Kesehatan</title>
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iIzRmYWNmZSIgZD0iTTEyIDJDNi40OCAyIDIgNi40OCAyIDEyczQuNDggMTAgMTAgMTAgMTAtNC40OCAxMC0xMFMxNy41MiAyIDEyIDJ6bTAgMThjLTQuNDEgMC04LTMuNTktOC04czMuNTktOCA4LTggOCAzLjU5IDggOC0zLjU5IDgtOCA4eiIvPjxwYXRoIGZpbGw9IiM0ZmFjZmUiIGQ9Im0xMCA3IDUtMyA1IDMtNSAzeiIvPjwvc3ZnPg==">
     <style>
         * {
             margin: 0;
@@ -16,10 +20,11 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
+            line-height: 1.6;
         }
         
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             background: white;
             border-radius: 15px;
@@ -43,6 +48,31 @@
         .header p {
             font-size: 1.1em;
             opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        
+        .header .subtitle {
+            font-size: 0.9em;
+            opacity: 0.8;
+            font-style: italic;
+        }
+        
+        .info-banner {
+            background: #e3f2fd;
+            border-left: 5px solid #2196f3;
+            padding: 15px 20px;
+            margin: 20px;
+            border-radius: 8px;
+        }
+        
+        .info-banner h4 {
+            color: #1976d2;
+            margin-bottom: 8px;
+        }
+        
+        .info-banner p {
+            color: #424242;
+            font-size: 0.95em;
         }
         
         .form-container {
@@ -62,6 +92,9 @@
             color: #2c3e50;
             margin-bottom: 20px;
             font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
         .question-group {
@@ -105,33 +138,36 @@
         .radio-item {
             display: flex;
             align-items: center;
-            padding: 10px 15px;
+            padding: 12px 16px;
             background: white;
             border: 2px solid #e1e5e9;
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
-            min-width: 120px;
+            min-width: 140px;
+            flex: 1;
         }
         
         .radio-item:hover {
             border-color: #4facfe;
             background: #f0f8ff;
+            transform: translateY(-1px);
         }
         
         .radio-item input[type="radio"] {
-            margin-right: 8px;
+            margin-right: 10px;
             width: auto;
         }
         
         .radio-item.selected {
             border-color: #4facfe;
             background: #e3f2fd;
+            box-shadow: 0 4px 12px rgba(79, 172, 254, 0.2);
         }
         
         .checkbox-group {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 12px;
             margin-top: 10px;
         }
@@ -150,90 +186,157 @@
         .checkbox-item:hover {
             border-color: #4facfe;
             background: #f0f8ff;
+            transform: translateY(-1px);
         }
         
         .checkbox-item input[type="checkbox"] {
-            margin-right: 10px;
+            margin-right: 12px;
             width: auto;
         }
         
         .checkbox-item.checked {
             border-color: #4facfe;
             background: #e3f2fd;
+            box-shadow: 0 4px 12px rgba(79, 172, 254, 0.2);
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
         }
         
         .calculate-btn {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 15px 40px;
+            padding: 16px 40px;
             border: none;
             border-radius: 8px;
             font-size: 1.1em;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            width: 100%;
-            margin: 30px 0;
+            flex: 1;
+            min-width: 200px;
         }
         
         .calculate-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-        
-        .result {
-            display: none;
-            background: #e8f5e8;
-            border: 2px solid #4caf50;
-            border-radius: 12px;
-            padding: 25px;
-            margin-top: 20px;
-        }
-        
-        .result.show {
-            display: block;
-            animation: slideIn 0.5s ease;
-        }
-        
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .result h3 {
-            color: #2e7d32;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-        }
-        
-        .score-display {
-            font-size: 2em;
-            font-weight: bold;
-            color: #1976d2;
-            text-align: center;
-            margin: 20px 0;
-        }
-        
-        .interpretation {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
         
         .reset-btn {
             background: #6c757d;
             color: white;
-            padding: 10px 20px;
+            padding: 16px 30px;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
+            font-size: 1em;
             cursor: pointer;
-            margin-left: 10px;
+            transition: all 0.3s ease;
         }
         
         .reset-btn:hover {
             background: #5a6268;
+            transform: translateY(-1px);
+        }
+        
+        .result {
+            display: none;
+            background: #e8f5e8;
+            border: 3px solid #4caf50;
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 25px;
+        }
+        
+        .result.show {
+            display: block;
+            animation: slideIn 0.6s ease;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .result h3 {
+            color: #2e7d32;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            text-align: center;
+        }
+        
+        .score-display {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #1976d2;
+            text-align: center;
+            margin: 25px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .interpretation {
+            background: white;
+            border: 2px solid #ffa726;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .interpretation h4 {
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        .interpretation ul {
+            padding-left: 20px;
+        }
+        
+        .interpretation li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+        
+        .disclaimer {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        
+        .disclaimer strong {
+            color: #856404;
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.9em;
+            border-top: 1px solid #dee2e6;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #e9ecef;
+            border-radius: 3px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            width: 0%;
+            transition: width 0.3s ease;
         }
         
         @media (max-width: 768px) {
@@ -261,6 +364,39 @@
             .radio-item {
                 min-width: auto;
             }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .score-display {
+                font-size: 2em;
+            }
+            
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+            
+            .header {
+                background: #f8f9fa !important;
+                color: #333 !important;
+            }
+            
+            .calculate-btn, .reset-btn {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -269,6 +405,16 @@
         <div class="header">
             <h1>📋 Skrining PUMA Score PPOK</h1>
             <p>Penilaian Komprehensif untuk Penyakit Paru Obstruktif Kronik</p>
+            <p class="subtitle">Tool Gratis untuk Tenaga Kesehatan Indonesia</p>
+        </div>
+        
+        <div class="info-banner">
+            <h4>ℹ️ Tentang PUMA Score</h4>
+            <p>PUMA (Pulmonary, Understated, Multidimensional Assessment) adalah sistem penilaian komprehensif yang mengevaluasi tingkat keparahan PPOK berdasarkan fungsi paru, gejala klinis, riwayat eksaserbasi, kapasitas latihan, dan kualitas hidup pasien.</p>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
         </div>
         
         <div class="form-container">
@@ -278,23 +424,23 @@
                     <h3 class="section-title">👤 Data Pasien</h3>
                     <div class="question-group">
                         <div class="input-group">
-                            <label class="question">Nama Lengkap:</label>
-                            <input type="text" id="patientName" placeholder="Masukkan nama lengkap">
+                            <label class="question">Nama Lengkap / Inisial:</label>
+                            <input type="text" id="patientName" placeholder="Masukkan nama lengkap atau inisial pasien">
                         </div>
                         <div class="input-group">
-                            <label class="question">Usia:</label>
-                            <input type="number" id="age" placeholder="Masukkan usia" min="1" max="120">
+                            <label class="question">Usia (tahun):</label>
+                            <input type="number" id="age" placeholder="Masukkan usia pasien" min="1" max="120">
                         </div>
                         <div class="input-group">
                             <label class="question">Jenis Kelamin:</label>
                             <div class="radio-group">
                                 <label class="radio-item">
                                     <input type="radio" name="gender" value="male">
-                                    <span>Laki-laki</span>
+                                    <span>👨 Laki-laki</span>
                                 </label>
                                 <label class="radio-item">
                                     <input type="radio" name="gender" value="female">
-                                    <span>Perempuan</span>
+                                    <span>👩 Perempuan</span>
                                 </label>
                             </div>
                         </div>
@@ -306,7 +452,10 @@
                     <h3 class="section-title">🫁 Fungsi Paru (Spirometri)</h3>
                     <div class="question-group">
                         <label class="question">Nilai FEV1 (% prediksi):</label>
-                        <input type="number" id="fev1" placeholder="Masukkan nilai FEV1 (%)" min="0" max="100">
+                        <input type="number" id="fev1" placeholder="Masukkan nilai FEV1 dalam persen (%)" min="0" max="100">
+                        <small style="color: #666; display: block; margin-top: 5px;">
+                            <strong>FEV1</strong> = Forced Expiratory Volume in 1 second (Volume Ekspirasi Paksa dalam 1 detik)
+                        </small>
                     </div>
                     <div class="question-group">
                         <label class="question">Klasifikasi GOLD berdasarkan FEV1:</label>
@@ -333,25 +482,25 @@
 
                 <!-- Gejala dan Sesak Napas -->
                 <div class="section">
-                    <h3 class="section-title">😮‍💨 Gejala dan Sesak Napas (mMRC Scale)</h3>
+                    <h3 class="section-title">😮‍💨 Gejala dan Sesak Napas</h3>
                     <div class="question-group">
                         <label class="question">Tingkat sesak napas (mMRC Dyspnea Scale):</label>
                         <div class="radio-group">
                             <label class="radio-item">
                                 <input type="radio" name="dyspnea" value="0">
-                                <span>0 - Tidak sesak kecuali aktivitas berat</span>
+                                <span>0 - Tidak sesak kecuali aktivitas sangat berat</span>
                             </label>
                             <label class="radio-item">
                                 <input type="radio" name="dyspnea" value="1">
-                                <span>1 - Sesak saat jalan cepat/naik</span>
+                                <span>1 - Sesak saat jalan cepat atau naik tangga</span>
                             </label>
                             <label class="radio-item">
                                 <input type="radio" name="dyspnea" value="2">
-                                <span>2 - Jalan lebih lambat dari orang lain</span>
+                                <span>2 - Jalan lebih lambat dari orang seusia</span>
                             </label>
                             <label class="radio-item">
                                 <input type="radio" name="dyspnea" value="3">
-                                <span>3 - Berhenti setelah jalan 100m</span>
+                                <span>3 - Berhenti setelah jalan ±100 meter</span>
                             </label>
                             <label class="radio-item">
                                 <input type="radio" name="dyspnea" value="4">
@@ -365,31 +514,31 @@
                 <div class="section">
                     <h3 class="section-title">🩺 Gejala Klinis</h3>
                     <div class="question-group">
-                        <label class="question">Gejala yang dialami (pilih semua yang sesuai):</label>
+                        <label class="question">Gejala yang dialami pasien (pilih semua yang sesuai):</label>
                         <div class="checkbox-group">
                             <label class="checkbox-item">
                                 <input type="checkbox" name="symptoms" value="cough">
-                                <span>Batuk kronik</span>
+                                <span>🤧 Batuk kronik (>8 minggu)</span>
                             </label>
                             <label class="checkbox-item">
                                 <input type="checkbox" name="symptoms" value="sputum">
-                                <span>Produksi dahak</span>
+                                <span>🫧 Produksi dahak berlebihan</span>
                             </label>
                             <label class="checkbox-item">
                                 <input type="checkbox" name="symptoms" value="wheezing">
-                                <span>Mengi/wheezing</span>
+                                <span>🎵 Mengi/wheezing</span>
                             </label>
                             <label class="checkbox-item">
                                 <input type="checkbox" name="symptoms" value="chest_tightness">
-                                <span>Dada terasa sesak</span>
+                                <span>🫸 Dada terasa sesak/tertekan</span>
                             </label>
                             <label class="checkbox-item">
                                 <input type="checkbox" name="symptoms" value="fatigue">
-                                <span>Mudah lelah</span>
+                                <span>😴 Mudah lelah</span>
                             </label>
                             <label class="checkbox-item">
                                 <input type="checkbox" name="symptoms" value="sleep_disturbance">
-                                <span>Gangguan tidur</span>
+                                <span>🌙 Gangguan tidur</span>
                             </label>
                         </div>
                     </div>
@@ -400,10 +549,13 @@
                     <h3 class="section-title">🏥 Riwayat Eksaserbasi</h3>
                     <div class="question-group">
                         <label class="question">Jumlah eksaserbasi dalam 12 bulan terakhir:</label>
-                        <input type="number" id="exacerbations" placeholder="Masukkan jumlah eksaserbasi" min="0">
+                        <input type="number" id="exacerbations" placeholder="Masukkan jumlah serangan akut PPOK" min="0">
+                        <small style="color: #666; display: block; margin-top: 5px;">
+                            <strong>Eksaserbasi</strong> = perburukan akut gejala PPOK yang memerlukan perubahan pengobatan
+                        </small>
                     </div>
                     <div class="question-group">
-                        <label class="question">Hospitalisasi akibat PPOK dalam 12 bulan terakhir:</label>
+                        <label class="question">Jumlah hospitalisasi akibat PPOK dalam 12 bulan terakhir:</label>
                         <input type="number" id="hospitalizations" placeholder="Masukkan jumlah rawat inap" min="0">
                     </div>
                 </div>
@@ -412,27 +564,30 @@
                 <div class="section">
                     <h3 class="section-title">🚶‍♂️ Kapasitas Latihan</h3>
                     <div class="question-group">
-                        <label class="question">Jarak 6-minute walk test (jika tersedia):</label>
-                        <input type="number" id="walkTest" placeholder="Masukkan jarak dalam meter" min="0">
+                        <label class="question">Jarak 6-minute walk test (opsional):</label>
+                        <input type="number" id="walkTest" placeholder="Masukkan jarak dalam meter (jika pernah dilakukan)" min="0">
+                        <small style="color: #666; display: block; margin-top: 5px;">
+                            Kosongkan jika belum pernah dilakukan tes ini
+                        </small>
                     </div>
                     <div class="question-group">
                         <label class="question">Kemampuan aktivitas sehari-hari:</label>
                         <div class="radio-group">
                             <label class="radio-item">
                                 <input type="radio" name="activityLevel" value="0">
-                                <span>Normal - tidak terbatas</span>
+                                <span>✅ Normal - tidak terbatas</span>
                             </label>
                             <label class="radio-item">
                                 <input type="radio" name="activityLevel" value="1">
-                                <span>Ringan - sedikit terbatas</span>
+                                <span>⚠️ Ringan - sedikit terbatas</span>
                             </label>
                             <label class="radio-item">
                                 <input type="radio" name="activityLevel" value="2">
-                                <span>Sedang - cukup terbatas</span>
+                                <span>🔶 Sedang - cukup terbatas</span>
                             </label>
                             <label class="radio-item">
                                 <input type="radio" name="activityLevel" value="3">
-                                <span>Berat - sangat terbatas</span>
+                                <span>🔴 Berat - sangat terbatas</span>
                             </label>
                         </div>
                     </div>
@@ -442,46 +597,70 @@
                 <div class="section">
                     <h3 class="section-title">💭 Kualitas Hidup</h3>
                     <div class="question-group">
-                        <label class="question">Seberapa besar PPOK mempengaruhi kualitas hidup Anda?</label>
+                        <label class="question">Seberapa besar PPOK mempengaruhi kualitas hidup pasien?</label>
                         <div class="radio-group">
                             <label class="radio-item">
                                 <input type="radio" name="qualityOfLife" value="0">
-                                <span>Tidak berpengaruh</span>
+                                <span>😊 Tidak berpengaruh</span>
                             </label>
                             <label class="radio-item">
                                 <input type="radio" name="qualityOfLife" value="1">
-                                <span>Sedikit berpengaruh</span>
+                                <span>🙂 Sedikit berpengaruh</span>
                             </label>
                             <label class="radio-item">
                                 <input type="radio" name="qualityOfLife" value="2">
-                                <span>Cukup berpengaruh</span>
+                                <span>😐 Cukup berpengaruh</span>
                             </label>
                             <label class="radio-item">
                                 <input type="radio" name="qualityOfLife" value="3">
-                                <span>Sangat berpengaruh</span>
+                                <span>😞 Sangat berpengaruh</span>
                             </label>
                         </div>
                     </div>
                 </div>
 
-                <button type="button" class="calculate-btn" onclick="calculatePUMAScore()">
-                    🧮 Hitung PUMA Score
-                </button>
-                
-                <button type="button" class="reset-btn" onclick="resetForm()">
-                    🔄 Reset Form
-                </button>
+                <div class="button-group">
+                    <button type="button" class="calculate-btn" onclick="calculatePUMAScore()">
+                        🧮 Hitung PUMA Score
+                    </button>
+                    
+                    <button type="button" class="reset-btn" onclick="resetForm()">
+                        🔄 Reset Form
+                    </button>
+                </div>
             </form>
 
             <div id="result" class="result">
                 <h3>📊 Hasil PUMA Score</h3>
                 <div id="scoreDisplay" class="score-display"></div>
                 <div id="interpretation" class="interpretation"></div>
+                <div class="disclaimer">
+                    <strong>⚠️ Disclaimer:</strong><br>
+                    Hasil skrining ini adalah alat bantu penilaian dan tidak menggantikan evaluasi klinis dokter. 
+                    Selalu konsultasikan dengan dokter spesialis paru untuk diagnosis dan penatalaksanaan yang tepat.
+                </div>
             </div>
+        </div>
+        
+        <div class="footer">
+            <p>🏥 <strong>Tool Skrining PUMA Score PPOK</strong> | Dikembangkan untuk Tenaga Kesehatan Indonesia</p>
+            <p>📧 Untuk feedback dan saran, silakan hubungi tim pengembang</p>
+            <p>© 2024 - Tool Medis Gratis | <a href="https://github.com" style="color: #4facfe;">GitHub Repository</a></p>
         </div>
     </div>
 
     <script>
+        // Update progress bar
+        function updateProgress() {
+            const form = document.getElementById('pumaForm');
+            const inputs = form.querySelectorAll('input[type="text"], input[type="number"], input[type="radio"]:checked, input[type="checkbox"]:checked');
+            const totalFields = 15; // Approximate number of main fields
+            const filledFields = inputs.length;
+            const progress = Math.min((filledFields / totalFields) * 100, 100);
+            
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
         // Handle radio button selections
         document.querySelectorAll('input[type="radio"]').forEach(radio => {
             radio.addEventListener('change', function() {
@@ -491,6 +670,7 @@
                 });
                 // Add selected class to current item
                 this.closest('.radio-item').classList.add('selected');
+                updateProgress();
             });
         });
 
@@ -502,15 +682,56 @@
                 } else {
                     this.closest('.checkbox-item').classList.remove('checked');
                 }
+                updateProgress();
             });
         });
 
+        // Handle text/number input changes
+        document.querySelectorAll('input[type="text"], input[type="number"]').forEach(input => {
+            input.addEventListener('input', updateProgress);
+        });
+
         function calculatePUMAScore() {
+            // Validate required fields
+            const requiredFields = ['age', 'fev1'];
+            const requiredRadios = ['gender', 'goldStage', 'dyspnea', 'activityLevel', 'qualityOfLife'];
+            
+            let isValid = true;
+            let missingFields = [];
+
+            // Check text/number inputs
+            requiredFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (!field.value) {
+                    isValid = false;
+                    missingFields.push(field.previousElementSibling.textContent.replace(':', ''));
+                    field.style.borderColor = '#dc3545';
+                } else {
+                    field.style.borderColor = '#e1e5e9';
+                }
+            });
+
+            // Check radio buttons
+            requiredRadios.forEach(radioName => {
+                if (!document.querySelector(`input[name="${radioName}"]:checked`)) {
+                    isValid = false;
+                    const radioGroup = document.querySelector(`input[name="${radioName}"]`).closest('.question-group');
+                    const questionText = radioGroup.querySelector('.question').textContent.replace(':', '');
+                    missingFields.push(questionText);
+                }
+            });
+
+            if (!isValid) {
+                alert('⚠️ Mohon lengkapi field berikut:\n• ' + missingFields.join('\n• '));
+                return;
+            }
+
             // Get form values
+            const patientName = document.getElementById('patientName').value || 'Pasien';
+            const age = parseInt(document.getElementById('age').value) || 0;
             const fev1 = parseInt(document.getElementById('fev1').value) || 0;
             const goldStage = parseInt(document.querySelector('input[name="goldStage"]:checked')?.value) || 0;
             const dyspnea = parseInt(document.querySelector('input[name="dyspnea"]:checked')?.value) || 0;
             const exacerbations = parseInt(document.getElementById('exacerbations').value) || 0;
             const hospitalizations = parseInt(document.getElementById('hospitalizations').value) || 0;
-            const activityLevel = parseInt(document.querySelector('input[name="activityLevel"]:checked')?.value) || 0;
-            const qualityOfL
+            const activityLevel = parseInt(document.querySelector('input[name
